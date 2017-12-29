@@ -8,7 +8,7 @@ function love.load()
 
   require('DecisionCard')
 
-  card = DecisionCard("Decision Card Main Title", "Some text in the card should display wrapped if that is an issue that has to be handled.")
+  card = DecisionCard("Decision Card Main Title", "Some text in the card should display wrapped if that is an issue that has to be handled.", "decision_card_test.png")
 end
 
 function love.update(dt)

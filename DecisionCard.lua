@@ -4,7 +4,7 @@ require('states')
 DecisionCard = class('DecisionCard')
 
 DecisionCard.static.width = love.graphics.getWidth() * 0.8
-DecisionCard.static.height = love.graphics.getHeight() * 0.7
+DecisionCard.static.height = love.graphics.getHeight() * 0.75
 DecisionCard.static.x = love.graphics.getWidth() * 0.1
 DecisionCard.static.y = love.graphics.getHeight() * 0.1
 DecisionCard.static.titleFont = love.graphics.newFont(20)
@@ -18,14 +18,16 @@ DecisionCard.static.offsetRight = 0.2
 DecisionCard.static.offsetLeft = -0.2
 
 
-function DecisionCard:initialize(title, text)
+function DecisionCard:initialize(title, text, img)
   self.title = title
   self.text = text
   self.state = DecisionCardStateDefault
+  self.image = love.graphics.newImage("sprites/decision_card_images/" .. img)
 end
 
 function DecisionCard:draw()
 
+  -- The state of the card determines where it should be drawn
   local x = DecisionCard.x
 
   if self.state == DecisionCardStateRight then
@@ -37,6 +39,9 @@ function DecisionCard:draw()
   -- Draw the card background
   setColor(DecisionCard.cardColor)
   love.graphics.rectangle("fill", x, DecisionCard.y, DecisionCard.width, DecisionCard.height)
+
+  -- Draw the card image
+  love.graphics.draw(self.image, x + DecisionCard.width / 2, DecisionCard.y + 100, nil, 0.5, 0.5, self.image:getWidth() / 2, nil)
 
   -- Draw the title
   setColor(DecisionCard.titleColor)
