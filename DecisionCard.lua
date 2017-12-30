@@ -18,11 +18,13 @@ DecisionCard.static.offsetRight = 0.2
 DecisionCard.static.offsetLeft = -0.2
 
 
-function DecisionCard:initialize(title, text, img)
-  self.title = title
-  self.text = text
+function DecisionCard:initialize(event_table)
+
+  self.title = event_table['main_title']
+  self.text = event_table['body_text']
   self.state = DecisionCardStateDefault
-  self.image = love.graphics.newImage("sprites/decision_card_images/" .. img)
+  local imageloc = "sprites/decision_card_images/" .. event_table['card_image']
+  self.image = love.graphics.newImage(imageloc)
 end
 
 function DecisionCard:draw()

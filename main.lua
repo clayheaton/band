@@ -4,11 +4,17 @@
 
 function love.load()
   love.window.setMode(600, 800)
+  require('libraries/table_utils')
   class = require('libraries/middleclass-master/middleclass')
+  ftcsv = require('libraries/ftcsv')
+
+  events, headers = ftcsv.parse('data/events.csv', ",")
+
+  print(table.tostring(events))
 
   require('DecisionCard')
 
-  card = DecisionCard("Decision Card Main Title", "Some text in the card should display wrapped if that is an issue that has to be handled.", "decision_card_test.png")
+  card = DecisionCard(events[2])
 end
 
 function love.update(dt)
