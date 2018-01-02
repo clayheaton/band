@@ -23,7 +23,14 @@ function DecisionCard:initialize(event_table)
   self.title = event_table['main_title']
   self.text = event_table['body_text']
   self.state = DecisionCardStateDefault
-  local imageloc = "sprites/decision_card_images/" .. event_table['card_image']
+  local imageloc
+
+  if event_table['card_image'] == '' then
+    imageloc = "sprites/decision_card_images/default_card_image.png"
+  else
+    imageloc = "sprites/decision_card_images/" .. event_table['card_image']
+  end
+
   self.image = love.graphics.newImage(imageloc)
 end
 
@@ -42,8 +49,13 @@ function DecisionCard:draw()
   setColor(DecisionCard.cardColor)
   love.graphics.rectangle("fill", x, DecisionCard.y, DecisionCard.width, DecisionCard.height)
 
-  -- Draw the card image
-  love.graphics.draw(self.image, x + DecisionCard.width / 2, DecisionCard.y + 100, nil, 0.5, 0.5, self.image:getWidth() / 2, nil)
+  -- Draw the card image - scaling depends on whether the image was captured on a retina screen
+  -- Card images should be 400 x 300
+  if self.image:getWidth() == 400 then
+    love.graphics.draw(self.image, x + DecisionCard.width / 2, DecisionCard.y + 100, nil, nil, nil, self.image:getWidth() / 2, nil)
+  else
+    love.graphics.draw(self.image, x + DecisionCard.width / 2, DecisionCard.y + 100, nil, 0.5, 0.5, self.image:getWidth() / 2, nil)
+  end
 
   -- Draw the title
   setColor(DecisionCard.titleColor)
