@@ -44,3 +44,10 @@ end
 function startNewGame()
   print("startNewGame() called from buttonclick callback in TitleScene")
 end
+
+-- Quit the game
+-- Perform any necessary prompting or cleanup here.
+-- Called when clicking on the Quit button
+function quitGame()
+  love.event.quit()
+end
