@@ -1,6 +1,7 @@
 require('states')
 require('colors')
 require('Scene')
+require('Button')
 
 TitleScene = class('TitleScene', Scene)
 
@@ -10,6 +11,17 @@ function TitleScene:initialize(scene_name)
 
   self.game_name = "Band"
   self.title_font = love.graphics.newFont(60)
+
+  self.buttons = {}
+
+  local winW = love.graphics.getWidth()
+  local winH = love.graphics.getHeight()
+
+  print(winW .. ", " .. winH)
+
+  local button_start_font = love.graphics.newFont(18)
+  local button_start = Button("button_start", "Play", {80, 80, 255}, color_white, button_start_font, startNewGame, winW * 0.75, winH * 0.85, winW * 0.2, winH * 0.1)
+  table.insert(self.buttons, button_start)
 end
 
 function TitleScene:update(dt)
@@ -20,6 +32,10 @@ function TitleScene:draw()
   setColor(color_white)
   love.graphics.setFont(self.title_font)
   love.graphics.printf(self.game_name, 0, 75, love.graphics.getWidth(), "center")
+
+  for i = 1, #self.buttons do
+    self.buttons[i]:draw()
+  end
 end
 
 function TitleScene:keypressed(key, scancode, isrepeat)
@@ -27,5 +43,13 @@ function TitleScene:keypressed(key, scancode, isrepeat)
 end
 
 function TitleScene:mousepressed(x, y, button, isTouch)
-  print("Mouse button " .. button .. " pressed: TitleScene default behavior")
+  print("Mouse button " .. button .. " pressed in TitleScene")
+  if button == 1 then
+    for i = 1, #self.buttons do
+      local hit = self.buttons[i]:catchMousePressedEvent(x, y)
+      if hit then
+        return
+      end
+    end
+  end
 end
