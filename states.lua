@@ -1,5 +1,7 @@
 CardStateDefault = 1
 CardStateRight = 2
 CardStateLeft = 3
-CardStateCommitRight = 4
-CardStateCommitLeft = 5
+CardStateDown = 4
+CardStateCommitRight = 5
+CardStateCommitLeft = 6
+CardStateCommitDown = 7

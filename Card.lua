@@ -22,6 +22,8 @@ Card.static.offsetRight = 0.2
 Card.static.offsetCommitRight = 0.8 -- change to off screen eventually
 Card.static.offsetLeft = -0.2
 Card.static.offsetCommitLeft = -0.8 -- change to off screen eventually
+Card.static.offsetDown = -0.2
+Card.static.offsetCommitDown = -0.8 -- change to off screen eventually
 
 
 function Card:initialize(event_table)
@@ -44,38 +46,43 @@ function Card:draw()
 
   -- The state of the card determines where it should be drawn
   local x = Card.x
+  local y = Card.y
 
   if self.state == CardStateRight then
     x = x + Card.offsetRight * love.graphics.getWidth()
   elseif self.state == CardStateLeft then
     x = x + Card.offsetLeft * love.graphics.getWidth()
+  elseif self.state == CardStateDown then
+    y = y - Card.offsetDown * love.graphics.getHeight()
   elseif self.state == CardStateCommitRight then
     x = x + Card.offsetCommitRight * love.graphics.getWidth()
   elseif self.state == CardStateCommitLeft then
     x = x + Card.offsetCommitLeft * love.graphics.getWidth()
+  elseif self.state == CardStateCommitDown then
+    y = y - Card.offsetCommitDown * love.graphics.getHeight()
   end
 
   -- Draw the card background
   setColor(Card.cardColor)
-  love.graphics.rectangle("fill", x, Card.y, Card.width, Card.height)
+  love.graphics.rectangle("fill", x, y, Card.width, Card.height)
 
   -- Draw the card image - scaling depends on whether the image was captured on a retina screen
   -- Card images should be 400 x 300
   if self.image:getWidth() == 400 then
-    love.graphics.draw(self.image, x + Card.width / 2, Card.y + 100, nil, nil, nil, self.image:getWidth() / 2, nil)
+    love.graphics.draw(self.image, x + Card.width / 2, y + 100, nil, nil, nil, self.image:getWidth() / 2, nil)
   else
-    love.graphics.draw(self.image, x + Card.width / 2, Card.y + 100, nil, 0.5, 0.5, self.image:getWidth() / 2, nil)
+    love.graphics.draw(self.image, x + Card.width / 2, y + 100, nil, 0.5, 0.5, self.image:getWidth() / 2, nil)
   end
 
   -- Draw the title
   setColor(Card.titleColor)
   love.graphics.setFont(Card.titleFont)
-  love.graphics.printf(self.title, x, Card.y + 20, Card.width, "center")
+  love.graphics.printf(self.title, x, y + 20, Card.width, "center")
 
   -- Draw the card body text
   setColor(Card.bodyColor)
   love.graphics.setFont(Card.bodyFont)
-  love.graphics.printf(self.text, x + Card.margin, Card.y + 60, Card.width - 2 * Card.margin, "center")
+  love.graphics.printf(self.text, x + Card.margin, y + 60, Card.width - 2 * Card.margin, "center")
 
 end
 
@@ -95,6 +102,16 @@ function Card:shiftPosition(dir)
       self.state = CardStateLeft
     elseif self.state == CardStateLeft then
       self.state = CardStateCommitLeft
+    end
+  elseif dir == "down" then
+    if self.state == CardStateDefault then
+      self.state = CardStateDown
+    elseif self.state == CardStateDown then
+      self.state = CardStateCommitDown
+    end
+  elseif dir == "up" then
+    if self.state == CardStateDown then
+      self.state = CardStateDefault
     end
   end
 end

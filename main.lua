@@ -15,9 +15,9 @@ function love.load()
 
   require('TitleScene')
   require('CreateCharacterScene')
-  require('DecisionCard')
+  require('Card')
 
-  card = DecisionCard(events[2])
+  card = Card(events[2])
 
   title_scene = TitleScene("Title Scene")
   character_scene = CreateCharacterScene("Create Character Scene")
@@ -30,8 +30,8 @@ function love.update(dt)
 end
 
 function love.draw()
-  -- card:draw()
-  active_scene:draw()
+  card:draw()
+  -- active_scene:draw()
 end
 
 function love.mousepressed(x, y, button, isTouch)
@@ -43,10 +43,6 @@ function love.keypressed(key, scancode, isrepeat)
   active_scene:keypressed(key, scancode, isrepeat)
 
   -- Reimplement as pass through to the scene with the card
-  -- if key == "right" then
-  --   card:shiftPosition("right")
-  -- elseif key == "left" then
-  --   card:shiftPosition("left")
-  -- end
+  card:shiftPosition(key)
 
 end
