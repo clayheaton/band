@@ -1,3 +1,8 @@
+--[[
+  Hosts the code to walk through the choices that a player has to make
+  when starting a new game and creating a character.
+]]
+
 require('states')
 require('colors')
 require('Scene')
@@ -29,6 +34,8 @@ function CreateCharacterScene:draw()
 end
 
 function CreateCharacterScene:keypressed(key, scancode, isrepeat)
+  -- TODO: Forward this to the active element
+
   print(key .. " pressed: CreateCharacterScene default behavior")
 end
 
