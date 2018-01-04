@@ -14,11 +14,13 @@ function love.load()
   -- print(table.tostring(events))
 
   require('TitleScene')
+  require('CreateCharacterScene')
   require('DecisionCard')
 
-  card = DecisionCard(events[1])
+  card = DecisionCard(events[2])
 
   title_scene = TitleScene("Title Scene")
+  character_scene = CreateCharacterScene("Create Character Scene")
 
   active_scene = title_scene
 end
@@ -40,6 +42,7 @@ function love.keypressed(key, scancode, isrepeat)
 
   active_scene:keypressed(key, scancode, isrepeat)
 
+  -- Reimplement as pass through to the scene with the card
   -- if key == "right" then
   --   card:shiftPosition("right")
   -- elseif key == "left" then

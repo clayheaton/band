@@ -2,6 +2,7 @@ require('states')
 require('colors')
 require('Scene')
 require('Button')
+require('button_callbacks')
 
 TitleScene = class('TitleScene', Scene)
 
