@@ -29,6 +29,10 @@ function love.load()
   -- tis = TextInputScreen(char_gen_events[2])
   -- tis:load()
 
+  for i = 1, 6 do
+    print( (i - 1)%3 + 1)
+  end
+
 end
 
 function love.update(dt)

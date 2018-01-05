@@ -100,7 +100,7 @@ function CreateCharacterScene:goBackStage()
 end
 
 function CreateCharacterScene:finishCharacter()
-
+  -- If any of the text inputs are missing values, randomize.
 end
 
 -- Catching key and mouse events

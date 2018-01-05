@@ -49,17 +49,24 @@ function TextInputScreen:update(dt)
 end
 
 function TextInputScreen:draw()
+  -- Draw the title text for the stage
   love.graphics.setFont(TextInputScreen.titleFont)
   setColor(TextInputScreen.titleColor)
   love.graphics.printf(self.main_title, 0, 50, love.graphics:getWidth(), "center")
 
+  -- Draw the descriptive text
   love.graphics.setFont(TextInputScreen.bodyFont)
   setColor(TextInputScreen.bodyColor)
   love.graphics.printf(self.body_text, 0, 100, love.graphics:getWidth(), "center")
 
+  -- Draw the line where the text input appears
   love.graphics.line(50, love.graphics:getHeight() / 2, love.graphics:getWidth() - 50, love.graphics:getHeight() / 2)
 
+  -- Draw the text input by the player
   love.graphics.printf(self.input_text, 0, love.graphics:getHeight() / 2 - 30, love.graphics:getWidth(), "center")
+
+  -- Draw the "leave blank to randomize" text
+  love.graphics.printf("(leave blank for random)", 0, love.graphics:getHeight() / 2 + 10, love.graphics:getWidth(), "center")
 end
 
 function TextInputScreen:textinput(t)
