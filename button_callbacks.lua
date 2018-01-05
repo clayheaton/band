@@ -15,3 +15,16 @@ end
 function quitGame()
   love.event.quit()
 end
+
+-- Callbacks for CreateCharacterScene
+function CreateCharacterAdvanceStage()
+  active_scene:advanceStage()
+end
+
+function CreateCharacterGoBackStage()
+  active_scene:goBackStage()
+end
+
+function CreateCharacterFinish()
+  active_scene:finishCharacter()
+end

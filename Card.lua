@@ -36,7 +36,7 @@ function Card:initialize(event_table)
   if event_table['card_image'] == '' then
     imageloc = "sprites/400x300.png"
   else
-    imageloc = "sprites/decision_card_images/" .. event_table['card_image']
+    imageloc = "sprites/" .. event_table['card_image']
   end
 
   self.image = love.graphics.newImage(imageloc)
@@ -84,6 +84,10 @@ function Card:draw()
   love.graphics.setFont(Card.bodyFont)
   love.graphics.printf(self.text, x + Card.margin, y + 60, Card.width - 2 * Card.margin, "center")
 
+end
+
+function Card:keypressed(key, scancode, isrepeat)
+  self:shiftPosition(key)
 end
 
 function Card:shiftPosition(dir)

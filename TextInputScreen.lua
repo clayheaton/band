@@ -51,7 +51,7 @@ end
 function TextInputScreen:draw()
   love.graphics.setFont(TextInputScreen.titleFont)
   setColor(TextInputScreen.titleColor)
-  love.graphics.printf(self.main_title, 0, 20, love.graphics:getWidth(), "center")
+  love.graphics.printf(self.main_title, 0, 50, love.graphics:getWidth(), "center")
 
   love.graphics.setFont(TextInputScreen.bodyFont)
   setColor(TextInputScreen.bodyColor)
