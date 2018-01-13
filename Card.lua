@@ -26,11 +26,13 @@ Card.static.offsetDown = -0.2
 Card.static.offsetCommitDown = -0.8 -- change to off screen eventually
 
 
-function Card:initialize(event_table)
+function Card:initialize(event_table, callback_on_commit)
 
   self.title = event_table['main_title']
   self.text = event_table['body_text']
   self.state = CardStateDefault
+  self.callback = callback_on_commit
+
   local imageloc
 
   if event_table['card_image'] == '' then
@@ -90,6 +92,10 @@ function Card:keypressed(key, scancode, isrepeat)
   self:shiftPosition(key)
 end
 
+function Card:centerPosition()
+  self.state = CardStateDefault
+end
+
 function Card:shiftPosition(dir)
   if dir == "right" then
     if self.state == CardStateLeft then
@@ -117,5 +123,16 @@ function Card:shiftPosition(dir)
     if self.state == CardStateDown then
       self.state = CardStateDefault
     end
+  end
+
+  if self.state == CardStateCommitRight then
+    print("Card committed Right")
+    self.callback(self)
+  elseif self.state == CardStateCommitLeft then
+    print("Card committed Left")
+    self.callback(self)
+  elseif self.state == CardStateCommitDown then
+    print("Card committed Down")
+    self.callback(self)
   end
 end

@@ -28,3 +28,8 @@ end
 function CreateCharacterFinish()
   active_scene:finishCharacter()
 end
+
+function CreateCharacterGenderSelected(card)
+  CreateCharacterAdvanceStage()
+  card:centerPosition()
+end

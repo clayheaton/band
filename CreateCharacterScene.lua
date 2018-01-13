@@ -33,7 +33,7 @@ function CreateCharacterScene:initialize(scene_name, stages)
     print(s)
 
     if s_type == 'Card' then
-      local stage = Card(s)
+      local stage = Card(s, CreateCharacterGenderSelected)
       table.insert(self.stages, stage)
     elseif s_type == 'TextInputScreen' then
       local stage = TextInputScreen(s)
