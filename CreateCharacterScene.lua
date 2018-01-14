@@ -36,7 +36,7 @@ function CreateCharacterScene:initialize(scene_name, stages)
       local stage = Card(s, CreateCharacterGenderSelected)
       table.insert(self.stages, stage)
     elseif s_type == 'TextInputScreen' then
-      local stage = TextInputScreen(s)
+      local stage = TextInputScreen(s, CreateCharacterTextInputScreenReturn)
       table.insert(self.stages, stage)
     elseif s_type == 'PersonalityGenerator' then
       local stage = PersonalityGenerator(s)

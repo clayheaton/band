@@ -4,6 +4,10 @@
 
 function love.load()
   love.window.setMode(600, 800)
+
+  -- Causes the math.random function to actually be random
+  math.randomseed(os.time())
+
   require('libraries/table_utils') -- Print tables
 
   class = require('libraries/middleclass-master/middleclass')

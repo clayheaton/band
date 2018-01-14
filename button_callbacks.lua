@@ -3,6 +3,7 @@
 ]]
 
 require('main')
+require('convenience')
 
 function startNewGame()
   print("startNewGame() called from buttonclick callback in TitleScene")
@@ -32,4 +33,22 @@ end
 function CreateCharacterGenderSelected(card)
   CreateCharacterAdvanceStage()
   card:centerPosition()
+end
+
+function CreateCharacterTextInputScreenReturn(stage)
+  -- Check for random and fill the value if it's an empty string
+  if trim(stage.input_text) == "" then
+    PickRandomName(stage)
+  end
+  CreateCharacterAdvanceStage()
+end
+
+function PickRandomName(stage)
+  if stage.attr_to_set == "first_name" then
+    stage.input_text = unisex_names[ math.random(#unisex_names) ]
+  elseif stage.attr_to_set == "last_name" then
+    stage.input_text = last_names[ math.random(#last_names) ]
+  elseif stage.attr_to_set == "home_town" then
+    stage.input_text = home_towns[ math.random(#home_towns) ]
+  end
 end

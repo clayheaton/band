@@ -16,6 +16,7 @@
 
 ]]
 
+require('reference_tables')
 require('colors')
 local utf8 = require("utf8")
 
@@ -26,11 +27,12 @@ TextInputScreen.static.bodyFont = love.graphics.newFont(18)
 TextInputScreen.static.titleColor = {255, 255, 255}
 TextInputScreen.static.bodyColor = {255, 255, 255}
 
-function TextInputScreen:initialize(event_table)
+function TextInputScreen:initialize(event_table, callback_on_commit)
   self.main_title = event_table['main_title']
   self.body_text = event_table['body_text']
   self.card_image = event_table['card_image']
   self.attr_to_set = event_table['attr_to_set']
+  self.callback = callback_on_commit
 
   self.input_text = ""
 
@@ -67,6 +69,8 @@ function TextInputScreen:draw()
 
   -- Draw the "leave blank to randomize" text
   love.graphics.printf("(leave blank for random)", 0, love.graphics:getHeight() / 2 + 10, love.graphics:getWidth(), "center")
+  love.graphics.printf("Press Return to Continue", 0, love.graphics:getHeight() / 2 + 40, love.graphics:getWidth(), "center")
+
 end
 
 function TextInputScreen:textinput(t)
@@ -76,6 +80,9 @@ function TextInputScreen:textinput(t)
 end
 
 function TextInputScreen:keypressed(key, scancode, isrepeat)
+  if key == "return" then
+    self.callback(self)
+  end
   if key == "backspace" then
     -- get the byte offset to the last UTF-8 character in the string.
     local byteoffset = utf8.offset(self.input_text, - 1)
