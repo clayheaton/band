@@ -1,7 +1,7 @@
-stage_type,main_title,body_text,card_image,attr_to_set,right_sets,left_sets,down_sets,swipe_right,swipe_left,swipe_down
-Card,Gender,"Right for Female, Left for Male, Down for Unspecified",gender-identity.png,gender,female,male,unspecified,TRUE,TRUE,TRUE
-TextInputScreen,First Name,What is your character's first name?,no_image,first_name,,,,,,
-TextInputScreen,Last Name,What is your character's last name?,no_image,last_name,,,,,,
-TextInputScreen,Home Town,What is your character's home town?,no_image,home_town,,,,,,
-PersonalityGenerator,Personality,Select personality traits for your character,no_image,personality,,,,,,
-PortraitPicker,Portrait,Select a portrait for your character,,portrait,,,,,,
+stage_type,main_title,body_text,card_image,attr_to_set,right_sets,left_sets,down_sets,swipe_right,swipe_left,swipe_down,randomize_table
+Card,Gender,"Right for Female, Left for Male, Down for Unspecified",gender-identity.png,gender,female,male,unspecified,TRUE,TRUE,TRUE,
+TextInputScreen,First Name,What is your character's first name?,no_image,first_name,,,,,,,unisex_names
+TextInputScreen,Last Name,What is your character's last name?,no_image,last_name,,,,,,,last_names
+TextInputScreen,Home Town,What is your character's home town?,no_image,home_town,,,,,,,home_towns
+PersonalityGenerator,Personality,Select personality traits for your character,no_image,personality,,,,,,,
+PortraitPicker,Portrait,Select a portrait for your character,,portrait,,,,,,,

@@ -3,7 +3,7 @@ require('colors')
 PersonalityGenerator = class('PersonalityGenerator')
 
 function PersonalityGenerator:initialize(event_table)
-
+  self.type = "PersonalityGenerator"
 end
 
 function PersonalityGenerator:draw()

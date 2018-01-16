@@ -27,7 +27,7 @@ Card.static.offsetCommitDown = -0.8 -- change to off screen eventually
 
 
 function Card:initialize(event_table, callback_on_commit)
-
+  self.type = "Card"
   self.title = event_table['main_title']
   self.text = event_table['body_text']
   self.state = CardStateDefault

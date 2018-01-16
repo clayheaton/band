@@ -18,6 +18,7 @@
 
 require('reference_tables')
 require('colors')
+require('convenience')
 local utf8 = require("utf8")
 
 TextInputScreen = class('TextInputScreen')
@@ -28,11 +29,13 @@ TextInputScreen.static.titleColor = {255, 255, 255}
 TextInputScreen.static.bodyColor = {255, 255, 255}
 
 function TextInputScreen:initialize(event_table, callback_on_commit)
+  self.type = "TextInputScreen"
   self.main_title = event_table['main_title']
   self.body_text = event_table['body_text']
   self.card_image = event_table['card_image']
   self.attr_to_set = event_table['attr_to_set']
   self.callback = callback_on_commit
+  self.randomize_table = table_with_name(event_table['randomize_table'])
 
   self.input_text = ""
 
@@ -42,6 +45,7 @@ function TextInputScreen:load()
   love.keyboard.setKeyRepeat(true)
 end
 
+-- Clean up when transitioning out of the class
 function TextInputScreen:unload()
   love.keyboard.setKeyRepeat(false)
 end
@@ -92,5 +96,12 @@ function TextInputScreen:keypressed(key, scancode, isrepeat)
       -- string.sub operates on bytes rather than UTF-8 characters, so we couldn't do string.sub(text, 1, -2).
       self.input_text = string.sub(self.input_text, 1, byteoffset - 1)
     end
+  end
+end
+
+function TextInputScreen:ifBlankAssignRandom()
+  if trim(self.input_text) == '' then
+    self.input_text = self.randomize_table[ math.random(#self.randomize_table) ]
+    print("Assigned '" .. self.input_text .. "' to " .. self.main_title)
   end
 end

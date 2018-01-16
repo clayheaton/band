@@ -8,7 +8,7 @@ PortraitPicker.static.titleColor = {255, 255, 255}
 PortraitPicker.static.bodyColor = {255, 255, 255}
 
 function PortraitPicker:initialize(event_table)
-
+  self.type = "PortraitPicker"
   self.main_title = event_table['main_title']
   self.body_text = event_table['body_text']
   self.card_image = event_table['card_image']

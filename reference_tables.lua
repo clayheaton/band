@@ -1,3 +1,13 @@
+function table_with_name(tab_name)
+  if tab_name == 'unisex_names' then
+    return unisex_names
+  elseif tab_name == 'last_names' then
+    return last_names
+  elseif tab_name == 'home_towns' then
+    return home_towns
+  end
+end
+
 unisex_names = {
   "Chris",
   "Pat",

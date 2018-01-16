@@ -11,6 +11,7 @@ require('Card')
 require('TextInputScreen')
 require('PersonalityGenerator')
 require('PortraitPicker')
+require('reference_tables')
 
 CreateCharacterScene = class('CreateCharacterScene', Scene)
 
@@ -36,7 +37,7 @@ function CreateCharacterScene:initialize(scene_name, stages)
       local stage = Card(s, CreateCharacterGenderSelected)
       table.insert(self.stages, stage)
     elseif s_type == 'TextInputScreen' then
-      local stage = TextInputScreen(s, CreateCharacterTextInputScreenReturn)
+      local stage = TextInputScreen(s, CreateCharacterAdvanceStage) --CreateCharacterTextInputScreenReturn)
       table.insert(self.stages, stage)
     elseif s_type == 'PersonalityGenerator' then
       local stage = PersonalityGenerator(s)
@@ -101,6 +102,12 @@ end
 
 function CreateCharacterScene:finishCharacter()
   -- If any of the text inputs are missing values, randomize.
+  for i = 1, #self.stages, 1 do
+    local s = self.stages[i]
+    if s.type == "TextInputScreen" then
+      s:ifBlankAssignRandom()
+    end
+  end
 end
 
 -- Catching key and mouse events
