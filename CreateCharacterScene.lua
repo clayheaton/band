@@ -106,6 +106,8 @@ function CreateCharacterScene:finishCharacter()
     local s = self.stages[i]
     if s.type == "TextInputScreen" then
       s:ifBlankAssignRandom()
+    elseif s.type == "Card" then
+      s:randomizeValueIfNil()
     end
   end
 end

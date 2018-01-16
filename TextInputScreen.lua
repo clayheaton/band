@@ -35,10 +35,12 @@ function TextInputScreen:initialize(event_table, callback_on_commit)
   self.card_image = event_table['card_image']
   self.attr_to_set = event_table['attr_to_set']
   self.callback = callback_on_commit
-  self.randomize_table = table_with_name(event_table['randomize_table'])
-
   self.input_text = ""
 
+  -- The CSV table that produces the row that becomes the event_table for these
+  -- includes a randomize_table column that must be populated with the items
+  -- that are randomly assigned in the event the player leaves it blank.
+  self.randomize_table = table_with_name(event_table['randomize_table'])
 end
 
 function TextInputScreen:load()
@@ -99,6 +101,8 @@ function TextInputScreen:keypressed(key, scancode, isrepeat)
   end
 end
 
+--- This should be called when the player elects not to enter a value but a random
+-- value should be chosen for the text field.
 function TextInputScreen:ifBlankAssignRandom()
   if trim(self.input_text) == '' then
     self.input_text = self.randomize_table[ math.random(#self.randomize_table) ]

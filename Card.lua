@@ -33,6 +33,41 @@ function Card:initialize(event_table, callback_on_commit)
   self.state = CardStateDefault
   self.callback = callback_on_commit
 
+  self.chosen_value = nil
+
+  -- Establish the values that will be set when the swipe action is taken
+  self.all_swipe_values = {}
+
+  self.swipe_right_value = nil
+  self.can_swipe_right = event_table['swipe_right']
+  if self.can_swipe_right == "TRUE" then
+    self.can_swipe_right = true
+    self.swipe_right_value = event_table['right_sets']
+    table.insert(self.all_swipe_values, self.swipe_right_value)
+  else
+    self.can_swipe_right = false
+  end
+
+  self.swipe_left_value = nil
+  self.can_swipe_left = event_table['swipe_left']
+  if self.can_swipe_left == "TRUE" then
+    self.can_swipe_left = true
+    self.swipe_left_value = event_table['left_sets']
+    table.insert(self.all_swipe_values, self.swipe_left_value)
+  else
+    self.can_swipe_left = false
+  end
+
+  self.swipe_down_value = nil
+  self.can_swipe_down = event_table['swipe_down']
+  if self.can_swipe_down == "TRUE" then
+    self.can_swipe_down = true
+    self.swipe_down_value = event_table['down_sets']
+    table.insert(self.all_swipe_values, self.swipe_down_value)
+  else
+    self.can_swipe_down = false
+  end
+
   local imageloc
 
   if event_table['card_image'] == '' then
@@ -134,5 +169,12 @@ function Card:shiftPosition(dir)
   elseif self.state == CardStateCommitDown then
     print("Card committed Down")
     self.callback(self)
+  end
+end
+
+function Card:randomizeValueIfNil()
+  if self.chosen_value == nil then
+    self.chosen_value = self.all_swipe_values[ math.random(#self.all_swipe_values) ]
+    print("Card value set to " .. self.chosen_value)
   end
 end
